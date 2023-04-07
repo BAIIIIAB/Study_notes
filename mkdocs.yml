@@ -9,4 +9,9 @@ nav:
         - 'STM32': 'study_notes/STM32.md'
     - About: about.md
     
-theme: readthedocs
+theme: 
+    name: mkdocs
+    highlightjs: true
+    hljs_language:
+        - yaml
+        - rust
