@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://example.com/</loc>
+         <loc>https://xiexunbit.github.io/Study_notes/</loc>
          <lastmod>2023-04-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://example.com/about/</loc>
+         <loc>https://xiexunbit.github.io/Study_notes/about/</loc>
          <lastmod>2023-04-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://example.com/study_notes/C_language/</loc>
+         <loc>https://xiexunbit.github.io/Study_notes/study_notes/C_language/</loc>
          <lastmod>2023-04-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://example.com/study_notes/FreeRTOS/</loc>
+         <loc>https://xiexunbit.github.io/Study_notes/study_notes/FreeRTOS/</loc>
          <lastmod>2023-04-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://example.com/study_notes/LVGL/</loc>
+         <loc>https://xiexunbit.github.io/Study_notes/study_notes/LVGL/</loc>
          <lastmod>2023-04-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://example.com/study_notes/STM32/</loc>
+         <loc>https://xiexunbit.github.io/Study_notes/study_notes/STM32/</loc>
          <lastmod>2023-04-07</lastmod>
          <changefreq>daily</changefreq>
     </url>
