@@ -1,5 +1,5 @@
-site_name: MkLorum
-site_url: https://example.com/
+site_name: Onesec
+site_url: https://xiexunbit.github.io/Study_notes/
 nav:
     - Home: index.md
     - 'Notes': 
@@ -11,7 +11,3 @@ nav:
     
 theme: 
     name: mkdocs
-    highlightjs: true
-    hljs_language:
-        - yaml
-        - rust
