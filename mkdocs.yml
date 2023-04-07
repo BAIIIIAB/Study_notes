@@ -1,0 +1,12 @@
+site_name: MkLorum
+site_url: https://example.com/
+nav:
+    - Home: index.md
+    - 'Notes': 
+        - 'C_language': 'study_notes/C_language.md'
+        - 'FreeRTOS': 'study_notes/FreeRTOS.md'
+        - 'LVGL': 'study_notes/LVGL.md'
+        - 'STM32': 'study_notes/STM32.md'
+    - About: about.md
+    
+theme: readthedocs
