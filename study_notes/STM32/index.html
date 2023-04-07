@@ -1,195 +1,127 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://example.com/study_notes/STM32/" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>STM32 - MkLorum</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
-    
-      <script>
-        // Current page data
-        var mkdocs_page_name = "STM32";
-        var mkdocs_page_input_path = "study_notes\\STM32.md";
-        var mkdocs_page_url = "/study_notes/STM32/";
-      </script>
-    
-    <script src="../../js/jquery-3.6.0.min.js" defer></script>
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> MkLorum
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Notes</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../C_language/">C_language</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../FreeRTOS/">FreeRTOS</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../LVGL/">LVGL</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">STM32</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_1">知识铺垫</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#_2">学习内容</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_3">嵌入式系统的启动</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_4">下载方式的区别</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_5">嵌入式开发的三大方向</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#mcumpuap">MCU、MPU、AP</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#dspfpga">拓展：DSP与FPGA</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#_6">复杂嵌入式架构</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_7">哈弗架构与冯诺依曼架构</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#stm32_1">STM32最小系统</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_8">原理图</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#stm32_2">STM32结构</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#_9">总线结构</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#_10">存储结构</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#stm32_3">STM32寄存器</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpio">GPIO引脚操作方法</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpio_1">GPIO工作模式</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#stm32_4">STM32的外设引脚重映射</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_11">引脚复用与重映射总结</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpio_2">GPIO输出速度</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_12">配置时钟树</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#_13">查看时钟频率的两个方法</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#flash_latency_x">时钟配置参数FLASH_LATENCY_x的选择</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_14">中断与异常</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#_15">优先级配置</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#stm32_5">STM32的中断</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#exti">EXTI</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#systick">SysTick定时器</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_16">硬件延时与软件延时</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_17">按键中断例程</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_18">蜂鸣器</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_19">通信</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#_20">常见通信协议</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#_21">常见通信接口标准</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#stm32_6">STM32的串口</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#i2c">I^2^C</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#spi">SPI</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_24">寄存器编程</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#stm32f103proled">使用寄存器操作STM32F103pro的LED</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_25">疑问</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_26"></a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#eepromramflash">EEPROM、RAM、FLASH</a>
-    </li>
-        </ul>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                  </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
-                </li>
-              </ul>
-      </div>
-    </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">MkLorum</a>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-      </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Notes &raquo;</li>
-      <li>STM32</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
-              
-                <h1 id="stm32">STM32裸机开发</h1>
+        
+        <link rel="canonical" href="https://example.com/study_notes/STM32/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>STM32 - MkLorum</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">MkLorum</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../C_language/" class="dropdown-item">C_language</a>
+</li>
+                                    
+<li>
+    <a href="../FreeRTOS/" class="dropdown-item">FreeRTOS</a>
+</li>
+                                    
+<li>
+    <a href="../LVGL/" class="dropdown-item">LVGL</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">STM32</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../about/" class="nav-link">About</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../LVGL/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../about/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#stm32" class="nav-link">STM32裸机开发</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">知识铺垫</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">嵌入式系统的启动</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_4" class="nav-link">下载方式的区别</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_5" class="nav-link">嵌入式开发的三大方向</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="stm32">STM32裸机开发</h1>
 <div class="toc">
 <ul>
 <li><a href="#stm32">STM32裸机开发</a><ul>
@@ -671,51 +603,81 @@ int fgetc(FILE * f)
 <p><strong>Flash</strong>有个物理特性：只能写0，不能写1。如果把Flash的每个Bit，都看作一张纸，bit=1表示纸没有内容， bit=0表示纸写入了内容。当纸为白纸时（bit=1），这时往纸上写东西是可以的，写完后纸的状态变为bit=0。 当纸有内容时（bit=0），这时往纸上写东西只能让数据越乱，也就无法正常写数据。此时需要橡皮檫，进行 擦除操作，将有内容的纸（bit=0）变为白纸（bit=1），使得以后可以重新写入数据。</p>
 <p>因此，对Flash写数据前，通常需要擦除操作。对于W25Q64，数据擦除可以以Sector为单位也可以以Block 为单位。数据写入只能按照Page来写入，也就一次最多只能写256个Byte。</p>
 <p><img alt="image-20230406173444608" src="https://xiexun.oss-cn-hangzhou.aliyuncs.com/img2023/202304071633820.png" /></p>
-<p>学习使用万用表、示波器/逻辑分析仪、电烙铁</p>
-              
+<p>学习使用万用表、示波器/逻辑分析仪、电烙铁</p></div>
             </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../LVGL/" class="btn btn-neutral float-left" title="LVGL"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-          
         </div>
-      </div>
 
-    </section>
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-    
-      <span><a href="../LVGL/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../../about/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
 </div>
-    <script>var base_url = '../..';</script>
-    <script src="../../js/theme_extra.js" defer></script>
-    <script src="../../js/theme.js" defer></script>
-      <script src="../../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        };
-    </script>
 
-</body>
+    </body>
 </html>
