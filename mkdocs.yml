@@ -7,7 +7,7 @@ nav:
         - 'FreeRTOS': 'study_notes/FreeRTOS.md'
         - 'LVGL': 'study_notes/LVGL.md'
         - 'STM32': 'study_notes/STM32.md'
-            - 'SRAM': 'study_notes/SRAM.md'
+        - 'SRAM': 'study_notes/SRAM.md'
     - About: about.md
     
 theme: 
