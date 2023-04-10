@@ -8,6 +8,7 @@ nav:
         - 'LVGL': 'study_notes/LVGL.md'
         - 'STM32': 'study_notes/STM32.md'
         - 'SRAM': 'study_notes/SRAM.md'
+        - 'LCD': 'study_notes/LCD.md'
     - About: about.md
     
 theme: 
