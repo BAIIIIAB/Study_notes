@@ -59,6 +59,10 @@
 <li>
     <a href="../SRAM/" class="dropdown-item">SRAM</a>
 </li>
+                                    
+<li>
+    <a href="../LCD/" class="dropdown-item">LCD</a>
+</li>
                                 </ul>
                             </li>
                             <li class="navitem">
@@ -253,6 +257,7 @@
 </ul>
 <p>而掌握一款MCU的开发需要重点关注四大模块：<strong>时钟复位、中断异常、存储映射和外设寄存器组。</strong></p>
 <h2 id="_3">嵌入式系统的启动</h2>
+<p><strong>该部分内容请结合SRAM文档中存储器的分类学习</strong></p>
 <p>嵌入式系统支持多种启动方式。XIP设备启动、非XIP设备启动等等。比如：Nor Flash、SD卡、SPI Flash, 甚至支持UART、USB、网卡启动。（所谓XIP，全称为execute in Place，本地执行，可以不用将代码拷贝到内存，而是直接在代码的存储空间运行）</p>
 <p>但上述设备中，很多都不是XIP设备，CPU无法直接执行里面的代码，那为什么说<strong>CPU可以从非XIP设备启动</strong>呢？答案是：上电后，CPU运行的第1条指令、第1个程序，位于片内ROM（Read-only memory）中，它是XIP设备。（该程序使用C语言来写）
        这个程序会执行必要的初始化，比如：</p>
