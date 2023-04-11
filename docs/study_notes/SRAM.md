@@ -387,6 +387,7 @@ EEPROM（Electrically Erasable Programmable ROM）电子可擦除EPROM。
 NOR Flash的读取和我们常见的SDRAM的读取是一样，**用户可以直接运行装载在NOR FLASH里面的代码**，这样可以减少SRAM的容量从而节约了成本。
 Nor Flash，根据外部接口分，可分为**普通接口**和**SPI接口普通接口**的Nor Flash，多数支持CFI接口，所以，一般也叫做CFI接口。CFI接口，相对于串口的SPI来说，也被称为parallel接口，并行接口；另外，CFI接口是JEDEC定义的，所以，有的又成CFI接口为JEDEC接口。所以，可以简单理解为：对于Nor Flash来说，CFI接口＝JEDEC接口＝Parallel接口 = 并行接口
 NOR flash占据了容量为1～16MB闪存市场的大部分，而NAND flash只是用在8～128MB的产品当中，这也说明**NOR主要应用在代码存储介质中，NAND适合于数据存储**，NAND在CompactFlash、Secure Digital、PC Cards和MMC存储卡市场上所占份额最大
+
 **NAND FLASH**
 NAND Flash没有采取内存的随机读取技术，它的读取是以一次读取一块的形式来进行的，通常是一次读取512个字节，采用这种技术的Flash比较廉价。用户不能直接运行NAND Flash上的代码，因此好多使用NAND Flash的开发板除了使用NAND Flash以外，还用上了一块小的NOR Flash来运行启动代码。
 
