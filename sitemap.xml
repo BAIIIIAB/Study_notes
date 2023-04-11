@@ -16,7 +16,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://xiexunbit.github.io/Study_notes/study_notes/FatFs/</loc>
+         <lastmod>2023-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://xiexunbit.github.io/Study_notes/study_notes/FreeRTOS/</loc>
+         <lastmod>2023-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://xiexunbit.github.io/Study_notes/study_notes/Internal_Flash/</loc>
          <lastmod>2023-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>

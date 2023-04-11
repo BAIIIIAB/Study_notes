@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://xiexunbit.github.io/Study_notes/study_notes/FreeRTOS/">
+        <link rel="canonical" href="https://xiexunbit.github.io/Study_notes/study_notes/FatFs/">
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>FreeRTOS - Onesec</title>
+        <title>串行FLASH文件系统FatFs - Onesec</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/font-awesome.min.css" rel="stylesheet">
         <link href="../../css/base.css" rel="stylesheet">
@@ -36,7 +36,7 @@
                             <li class="navitem">
                                 <a href="../.." class="nav-link">Home</a>
                             </li>
-                            <li class="dropdown active">
+                            <li class="dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
@@ -45,7 +45,7 @@
 </li>
                                     
 <li>
-    <a href="./" class="dropdown-item active">FreeRTOS</a>
+    <a href="../FreeRTOS/" class="dropdown-item">FreeRTOS</a>
 </li>
                                     
 <li>
@@ -80,16 +80,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="nav-item">
-                                <a rel="prev" href="../C_language/" class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="../LVGL/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -107,12 +97,39 @@
     
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#flashfatfs" class="nav-link">串行FLASH文件系统FatFs</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#11" class="nav-link">1.1文件系统</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#12fatfs" class="nav-link">1.2FatFs文件系统简介</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p>test</p></div>
+<h1 id="flashfatfs">串行FLASH文件系统FatFs</h1>
+<h2 id="11">1.1文件系统</h2>
+<p>直接存储数据的方式对于小容量的存储介质如EEPROM还可以接受，但对于SPI Flash芯片或者SD卡之类的大容量设备，我们需要一种高效的方式来管理它的存储内容。</p>
+<p>文件系统是为了存储和管理数据，而在存储介质建立的一种组织结构，这些结构包括操作系统引导区、目录和文件。常见的windows下的文件系统格式包括FAT32、NTFS、exFAT。在使用文件系统前，要先对存储介质进行格式化。格式化先擦除原来内容，在存储介质上新建一个文件分配表和目录。这样，文件系统就可以记录数据存放的物理地址、剩余空间。</p>
+<p>使用文件系统时， 数据都以文件的形式存储。写入新文件时，先在目录中创建一个文件索引，它指示了文件存放的物理地址，再把数据存储到该地址中。当需要读取数据时，可以从目录中找到该文件的索引，进而在相应的地址中读取出数据。具体还涉及到逻辑地址、簇大小、不连续存储等一系列辅助结构或处理过程。</p>
+<p>文件系统的存在使我们在存取数据时，不再是简单地向某物理地址直接读写，而是要遵循它的读写格式。如经过逻辑转换，一个完整的文件可能被分开成多段存储到不连续的物理地址，使用目录或链表的方式来获知下一段的位置。</p>
+<h2 id="12fatfs">1.2FatFs文件系统简介</h2>
+<p>上面提到的逻辑转换部分代码(文件系统)即为本章的要点，文件系统庞大而复杂，它需要根据应用的文件系统格式而编写，而且一般与驱动层分离开来，很方便移植，所以工程应用中一般是移植现成的文件系统源码。</p>
+<p>FatFs是面向小型嵌入式系统的一种通用的FAT文件系统。它完全是由ANSI C语言编写并且完全独立于底层的I/O介质。因此它可以很容易地不加修改地移植到其他的处理器当中，如8051、PIC、AVR、SH、Z80、H8、ARM等。FatFs支持FAT12、FAT16、FAT32等格式，所以我们利用前面写好的SPI Flash芯片驱动，把FatFs文件系统代码移植到工程之中，就可以利用文件系统的各种函数，对SPI Flash芯片以“文件”格式进行读写操作了。</p>
+<p><img alt="image-20230411190752530" src="https://xiexun.oss-cn-hangzhou.aliyuncs.com/img2023/202304111907652.png" /></p>
+<p><img alt="image-20230411191049197" src="https://xiexun.oss-cn-hangzhou.aliyuncs.com/img2023/202304111910243.png" /></p>
+<p><img alt="image-20230411191132519" src="https://xiexun.oss-cn-hangzhou.aliyuncs.com/img2023/202304111911563.png" /></p>
+<p>一般只用到f_mount()，f_open()，f_write()，f_read()就可以实现文件的读写操作。</p>
+<p>移植过程中一般只需要修改<code>ffconf.h</code>和<code>diskio.c</code>两个文件。</p>
+<p>底层设备输入输出要求实现存储设备的读写操作函数、存储设备信息获取函数等等。我们使用SPI Flash芯片作为物理设备，需编写相应的驱动函数。</p></div>
             </div>
         </div>
 
