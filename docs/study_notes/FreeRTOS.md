@@ -294,23 +294,23 @@ void vTaskSuspend(TaskHandle_t xTaskToSuspend);
 
 #### 状态转换图
 
-<img src="img\任务状态转换图.png" alt="任务状态转换图" style="zoom:50%;" />
+<img_rtos src="img_rtos\任务状态转换图.png" alt="任务状态转换图" style="zoom:50%;" />
 
 ### 1.4 延时函数
 
 应用场景：固定时间期限处理某件事，中断处理程序耗时很短（微秒级以下可以），但如果处理程序耗时较长（毫秒级），则在中断里处理不现实。
 
-![相对延时与绝对延时对比](img\相对延时与绝对延时对比.png)
+![相对延时与绝对延时对比](img_rtos\相对延时与绝对延时对比.png)
 
 -   相对延时：`void vTaskDelay(const TickType_t xTicksToDelay)` 指每次延时都是从执行函数vTaskDelay开始，直到延时指定的时间。
 
 如果执行TEST任务的过程中发生中断，或者具有更高优先级的任务抢占了，那么TEST任务执行的周期就会变长，所以使用相对延时函数vTaskDelay()，不能周期性的执行TEST任务。
 
-<img src="img\相对延时.png" alt="相对延时" style="zoom:50%;" />
+<img_rtos src="img_rtos\相对延时.png" alt="相对延时" style="zoom:50%;" />
 
 -   绝对延时：`vTaskDelayUntil(TickType_t * const pxPreviousWakeTime, const TickType_t xTimeIncrement)`指每隔指定的时间（参数：滴答值），执行一次调用vTaskDelayUntil()函数。
 
-<img src="img\绝对延时.png" alt="绝对延时" style="zoom:50%;" />
+<img_rtos src="img_rtos\绝对延时.png" alt="绝对延时" style="zoom:50%;" />
 
 绝对延时参数说明：
 
@@ -404,7 +404,7 @@ void vTaskSuspend(TaskHandle_t xTaskToSuspend);
     -   数值只有0或1
     -   谁获得互斥量，就必须由谁释放同一个互斥量
 
-<img src="img\各种同步互斥方式对比示意.png" alt="各种同步互斥方式对比示意" style="zoom:67%;" />
+<img_rtos src="img_rtos\各种同步互斥方式对比示意.png" alt="各种同步互斥方式对比示意" style="zoom:67%;" />
 
 
 
@@ -577,7 +577,7 @@ BaseType_t xQueuePeekFromISR(QueueHandle_t xQueue, void *pvBuffer);
 
 示例：**队列的基本使用**，见程序`8_queue Dynamic&static`
 
-<img src="img/队列的基本使用任务调度情况.png" alt="队列的基本使用任务调度情况" style="zoom:67%;" />
+<img_rtos src="img_rtos/队列的基本使用任务调度情况.png" alt="队列的基本使用任务调度情况" style="zoom:67%;" />
 
 
 
@@ -585,7 +585,7 @@ BaseType_t xQueuePeekFromISR(QueueHandle_t xQueue, void *pvBuffer);
 
 示例：**数据来源**，见程序`9_queue_Datasource`
 
-<img src="img/数据来源.png" alt="数据来源" style="zoom: 50%;" />
+<img_rtos src="img_rtos/数据来源.png" alt="数据来源" style="zoom: 50%;" />
 
 示例：传输大块数据，见程序`10_queue_bigtransfer`
 
@@ -771,11 +771,11 @@ SemaphoreHandle_t xSemaphoreCreateMutexStatic(StaticSemaphore_t *pxMutexBuffer);
 
 优先级反转运行流程图：
 
-<img src="img/优先级反转运行流程.png" alt="优先级反转运行流程" style="zoom:67%;" />
+<img_rtos src="img_rtos/优先级反转运行流程.png" alt="优先级反转运行流程" style="zoom:67%;" />
 
 优先级反转时序图
 
-<img src="img/优先级反转时序图.png" alt="优先级反转时序图" style="zoom:50%;" />
+<img_rtos src="img_rtos/优先级反转时序图.png" alt="优先级反转时序图" style="zoom:50%;" />
 
 
 
@@ -798,7 +798,7 @@ SemaphoreHandle_t xSemaphoreCreateMutexStatic(StaticSemaphore_t *pxMutexBuffer);
 -   D：HPTask得到互斥锁，开始运行 
 -   互斥锁的"优先级继承"，可以减小"优先级反转"的影响
 
-<img src="img/优先级继承时序图.png" alt="优先级继承时序图" style="zoom: 67%;" />
+<img_rtos src="img_rtos/优先级继承时序图.png" alt="优先级继承时序图" style="zoom: 67%;" />
 
 
 
@@ -971,11 +971,11 @@ EventBits_t xEventGroupSync( EventGroupHandle_t xEventGroup, const EventBits_t u
 
 使用队列、信号量、事件组时，需要事先创建对应的结构体，双方通过中间的结构体通信：
 
-<img src="img/通常任务通信流程.png" alt="通常任务通信流程" style="zoom:50%;" />
+<img_rtos src="img_rtos/通常任务通信流程.png" alt="通常任务通信流程" style="zoom:50%;" />
 
 使用任务通知时，任务结构体TCB中就包含了内部对象，可以直接接收别人发过来的“通知”：
 
-<img src="img/任务通知流程.png" alt="任务通知流程" style="zoom:50%;" />
+<img_rtos src="img_rtos/任务通知流程.png" alt="任务通知流程" style="zoom:50%;" />
 
 任务通知的**优势**：
 
@@ -1210,7 +1210,7 @@ FreeRTOS是实时操作系统，它不允许在内核、在中断中执行不确
 
 用户程序要使用定时器时，是通过“定时器命令队列(timer command queue)”和守护任务交互，如下图所示
 
-<img src="img/守护任务交互过程.png" alt="守护任务交互过程" style="zoom: 50%;" />
+<img_rtos src="img_rtos/守护任务交互过程.png" alt="守护任务交互过程" style="zoom: 50%;" />
 
 守护任务的优先级：`configTIMER_TASK_PRIORITY`，定时器命令队列的长度`configTIMER_QUEUE_LENGTH`
 
@@ -1245,7 +1245,7 @@ FreeRTOS是实时操作系统，它不允许在内核、在中断中执行不确
 
 -   注意：假设定时器在后续某个时刻tX超时了，超时时间是"tX-t2"，而非"tX-t4"，**从 xTimerStart() 函数被调用时算起**
 
-<img src="img/守护任务优先级较低.png" alt="守护任务优先级较低" style="zoom:50%;" />
+<img_rtos src="img_rtos/守护任务优先级较低.png" alt="守护任务优先级较低" style="zoom:50%;" />
 
 例子2：**守护任务的优先性级较高**
 
@@ -1263,7 +1263,7 @@ FreeRTOS是实时操作系统，它不允许在内核、在中断中执行不确
 
 - 注：定时器的超时时间是基于调用`xTimerStart()`的时刻tX，而不是基于守护任务处理命令的时刻tY，假设超时时间是10个Tick，整个超时时间是“tx+10”，而非“tY+10”
 
-<img src="img/守护任务优先级较高.png" alt="守护任务优先级较高" style="zoom:50%;" />
+<img_rtos src="img_rtos/守护任务优先级较高.png" alt="守护任务优先级较高" style="zoom:50%;" />
 
 
 
@@ -1288,11 +1288,11 @@ typedef void (* TimerCallbackFunction_t)(TimerHandle_t xTimer);
 
 **自动加载定时器的状态转换图**
 
-<img src="img/自动重装载.png" alt="自动重装载" style="zoom: 67%;" />
+<img_rtos src="img_rtos/自动重装载.png" alt="自动重装载" style="zoom: 67%;" />
 
 **一次性定时器的状态转换图**
 
-<img src="img/一次性定时器.png" alt="一次性定时器" style="zoom:67%;" />
+<img_rtos src="img_rtos/一次性定时器.png" alt="一次性定时器" style="zoom:67%;" />
 
 ```C
 /* 使用动态分配内存的方法创建定时器
@@ -1367,7 +1367,7 @@ BaseType_t xTimerChangePeriodFromISR( TimerHandle_t xTimer, TickType_t xNewPerio
 
 **定时器ID**
 
-<img src="img/定时器结构体.png" alt="定时器结构体" style="zoom: 67%;" />
+<img_rtos src="img_rtos/定时器结构体.png" alt="定时器结构体" style="zoom: 67%;" />
 
 怎么使用定时器ID，完全由程序来决定： 
 
@@ -1406,7 +1406,7 @@ void vTimerSetTimerID(TimeHandle_t xTimer, void *pvNewID);
 -   由于抖动，在t3再次产生中断，再次复位定时器，超时时间变为"t3+20ms"
 -   在"t3+20ms"处，按键已经稳定，读取按键值
 
-<img src="img/按键抖动原理.png" alt="按键抖动原理" style="zoom:50%;" />
+<img_rtos src="img_rtos/按键抖动原理.png" alt="按键抖动原理" style="zoom:50%;" />
 
 
 
@@ -1647,7 +1647,7 @@ void XXX_ISR()
 -   t3：在创建任务时设置任务2的优先级比任务1高(这取决于设计者)，所以ISR返回后，运行的是任务2，它要完成中断的处理。**任务2即"deferred processing task"，中断的延迟处理任务**
 -   t4：任务2处理完中断后，进入阻塞态以等待下一个中断，任务1重新运行
 
-<img src="img/中断延迟处理.png" alt="中断延迟处理" style="zoom:67%;" />
+<img_rtos src="img_rtos/中断延迟处理.png" alt="中断延迟处理" style="zoom:67%;" />
 
 
 
@@ -1664,7 +1664,7 @@ void XXX_ISR()
 
 屏蔽一些优先级比较低的中断，而非**关闭所有中断**
 
-![cortex-m3中断](img/cortex-m3中断.png)
+![cortex-m3中断](img_rtos/cortex-m3中断.png)
 
 `FreeRTOSconfig.h`中的两个中断宏：
 
@@ -1908,7 +1908,7 @@ FreeRTOS中定义了很多trace开头的宏，这些宏被放在系统个关键�
     -   这方法很高效，但是并不精确
     -   比如：任务在运行过程中调用了函数A大量地使用了栈，调用完函数A后才被调度。
 
-![栈信息1](img/栈信息1.png)
+![栈信息1](img_rtos/栈信息1.png)
 
 -   方法二：
     -   创建任务时，它的栈被填入固定的值，比如：0xa5
@@ -1916,7 +1916,7 @@ FreeRTOS中定义了很多trace开头的宏，这些宏被放在系统个关键�
     -   没有方法1快速，但是也足够快，能捕获**几乎所有**的栈溢出
     -   为什么是几乎所有？可能有些函数使用栈时，非常凑巧地把栈设置为0xa5
 
-![栈信息2](img/栈信息2.png)
+![栈信息2](img_rtos/栈信息2.png)
 
 
 
@@ -1953,7 +1953,7 @@ UBaseType_t uxTaskGetStackHighWaterMark( TaskHandle_t xTask );
 
 使用这个定时器来衡量一个任务的运行时间，原理如下图所示：
 
-<img src="img/03_task_statistics.png" alt="image-20211201150333865" style="zoom:50%;" />
+<img_rtos src="img_rtos/03_task_statistics.png" alt="image-20211201150333865" style="zoom:50%;" />
 
 
 
@@ -1982,12 +1982,12 @@ UBaseType_t uxTaskGetStackHighWaterMark( TaskHandle_t xTask );
 
 * 初始化更快的定时器：启动调度器时
 
-    ![image-20211201152037316](img/04_init_timer.png)
+    ![image-20211201152037316](img_rtos/04_init_timer.png)
 
     
 
 * 在任务切换时统计运行时间
-    ![image-20211201152339799](img/05_cal_runtime.png)
+    ![image-20211201152339799](img_rtos/05_cal_runtime.png)
 
 
 
@@ -2021,7 +2021,7 @@ UBaseType_t uxTaskGetSystemState( TaskStatus_t * const pxTaskStatusArray, const 
 
 可读信息格式如下：
 
-  ![image-20211201152918891](img/06_task_list.png)
+  ![image-20211201152918891](img_rtos/06_task_list.png)
 
 * vTaskGetRunTimeStats：获得任务的运行信息，形式为可读的字符串。注意，pcWriteBuffer必须足够大。
 
@@ -2031,7 +2031,7 @@ void vTaskGetRunTimeStats( signed char *pcWriteBuffer );
 
   可读信息格式如下：
 
-![image-20211201153040395](img/07_task_runtimestats.png)
+![image-20211201153040395](img_rtos/07_task_runtimestats.png)
 
 ## X.Tips
 
